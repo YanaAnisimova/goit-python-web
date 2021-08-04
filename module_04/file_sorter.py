@@ -124,4 +124,6 @@ if __name__ == '__main__':
     else:
         print(f'The path {path_old} does not exist.')
 
-
+# Lead time: 1.264 s
+# Lead time: 2.703 s
+# Lead time: 1.41 s

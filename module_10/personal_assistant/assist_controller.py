@@ -84,7 +84,7 @@ class CommandBirthday:
                     break
             except ValueError:
                 self.view.requests_input_number()
-        users = self.model.to_congratulate(n, datetime.now())
+        users = self.model.to_congratulate(n, datetime.now().date())
         if users:
             self.view.display_who_to_wish_happy_birthday(users)
         else:

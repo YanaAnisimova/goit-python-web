@@ -1,6 +1,8 @@
 import re
 from datetime import timedelta, datetime
 
+from lru_cache import lru_cache
+
 import pymongo
 
 from personal_assistant.db import contacts_collection
@@ -92,7 +94,9 @@ class RecordForDeletion:
 
 
 class BirthdayPeople:
-    def to_congratulate(self, n, datetime_now):
+    @staticmethod
+    @lru_cache(3)
+    def to_congratulate(n, datetime_now):
         """
         The function returns a list of contacts filtered by date of birth after "n" days.
         """
@@ -129,7 +133,9 @@ class BirthdayPeople:
 
 
 class RecordSearcher:
-    def to_search(self, key_word):
+    @staticmethod
+    @lru_cache(3)
+    def to_search(key_word):
         """
         Search for contacts and notes from the contact book. NOT LOOKING FOR BY DATE OF BIRTH !!!
         """

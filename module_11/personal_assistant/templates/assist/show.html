@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Contacts{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="filter-wrap">
+        {% if url_for(request.endpoint) != url_for('assist.birthday') %}
+        <div class="filter">
+            <form action="{{ url_for('assist.search') }}" method="get">
+                <input
+                        type="text"
+                        name="keyword"
+                        placeholder="Enter the keyword"
+                        value="{{ request.form['keyword'] }}"
+                        required>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        {% endif %}
+        {% if url_for(request.endpoint) != url_for('assist.search') %}
+        <div class="filter">
+            <form action="{{ url_for('assist.birthday') }}" method="get">
+                <input
+                        type="number"
+                        name="count_day"
+                        placeholder="Enter the count of days to birthday"
+                        value="{{ request.form['count_day'] }}"
+                        required>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+
+    <div class="table-wrapper">
+        {% if not contacts%}
+        <p> No matches! </p>
+        {% else %}
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>E-mail</th>
+                <th style="min-width: 90px;">Birthday</th>
+                <th>Note</th>
+                <th>Controls</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact['index'] }}</td>
+                <td>{{ contact['name'] }}</td>
+                <td>{{ contact['phone'] }}</td>
+                <td>{{ contact['email'] }}</td>
+                <td>{{ contact['birthday'] }}</td>
+                <td>{{ contact['note'] }}</td>
+                <td>
+                    <form action="{{ url_for('assist.delete', contact_id=contact['id']) }}" method="post">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <a href='{{ url_for("assist.edit", contact_id=contact["id"]) }}'><button class="btn btn-warning">Edit</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

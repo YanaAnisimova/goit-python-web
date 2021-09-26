@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}
+        {% if request.endpoint == 'assist.create' %}
+            Create contact
+        {% endif %}
+
+        {% if request.endpoint == 'assist.edit' %}
+            Edit contact
+        {% endif %}
+
+      {% endblock %}</h1>
+{% endblock %}
+{% block content %}
+    <form method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="{{name}}">
+        <label for="phone">Phone</label>
+        <input type="tel" name="phone" id="phone" value="{{ phone }}">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{email}}">
+
+        <label for="birthday">Birthday</label>
+        <input type="date" name="birthday" id="birthday" value="{{birthday}}">
+
+        <label for="note">Note</label>
+        <input type="text" name="note" id="note" value="{{note}}">
+
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

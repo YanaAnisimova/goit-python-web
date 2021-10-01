@@ -1,0 +1,30 @@
+body{
+  background-color: lightgrey;
+}
+.content{
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+}
+.table{
+  width: 100%;
+  border-collapse: collapse
+}
+td, th{
+  padding: 5px;
+  text-align: center;
+}
+.wrap-th{
+  display: flex;
+}
+.wrap-th__text{
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrap-th__text span{
+  width: 100%;
+}
+.logo{
+  width: 100%;
+}

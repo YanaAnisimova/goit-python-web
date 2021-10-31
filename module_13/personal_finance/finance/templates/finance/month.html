@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col mb-3">
+            <h1 class="mb-3 mt-3">{% block title %}Report by month{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Month</th>
+        <th scope="col">Income</th>
+        <th scope="col">Expenditure</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for year, value in sum_by_month.items %}
+    <tr>
+        <td>{{ year }}</td>
+        {% for month, value in value.items %}
+        <tr>
+            <td></td>
+            <td>{{ month }}</td>
+            <td>{{ value.income }}</td>
+            <td>{{ value.expenditure }}</td>
+        </tr>
+        {% endfor %}
+
+    </tr>
+    {% endfor %}
+    <tr class="table-active">
+        <td>Sum</td>
+        <td></td>
+        <td>{{ sum_income }}</td>
+        <td>{{ sum_expenditure }}</td>
+    </tr>
+    <tr class="table-active">
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td>{{ total }}</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
+

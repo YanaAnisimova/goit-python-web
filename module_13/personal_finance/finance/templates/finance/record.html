@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col mb-3">
+            <h1 class="mb-3 mt-3">{% block title %}Record{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6 mb-3">
+            <form action="{% url 'finance:new_record' %}" method="post">
+                {% csrf_token %}
+
+
+                <div class="w-100 mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="income_expenditure" id="income" value="income" required>
+                        <label class="form-check-label"  for="income">Income</label><br>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="income_expenditure" id="expenditure" value="expenditure" required>
+                        <label class="form-check-label"  for="expenditure">Expenditure</label><br>
+                    </div>
+                </div>
+
+
+                <b>Categories</b>
+                <select class="w-100 mb-3 mt-2 form-select" name="category" required>
+                    <option value="" autofocus>Select a category</option>
+                    {% for category in categories %}
+                    <option value="{{category.id}}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="w-100" for="money"><b>Money, $</b></label>
+                <input class="w-100 form-control" name="money" id="money" required>
+                <br>
+                <label class="w-100" for="comment"><b>Comment</b></label>
+                <input class="w-100 form-control" name="comment" id="comment">
+                <br>
+                <input class="btn btn-warning mt-3 d-flex" name="Reports" type="submit" value="Reports">
+            </form>
+
+        </div>
+        <div class="col-6">
+            <form action="{% url 'finance:new_record' %}" method="post">
+                {% csrf_token %}
+                <label for="new_category"><b>Create category</b></label>
+                <input class="w-100 form-control" name="new_category" id="new_category" required>
+                <br>
+                <input class="btn btn-warning d-flex" name="Create category" type="submit" value="Create category">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+

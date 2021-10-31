@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col mb-3">
+            <h1 class="mb-3 mt-3">{% block title %}Report by category{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Income</th>
+        <th scope="col">Expenditure</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cat in sum_by_category.values %}
+    <tr>
+        <td>{{ cat.category.name}}</td>
+        <td>{{ cat.sum_i }}</td>
+        <td>{{ cat.sum_ex }}</td>
+    </tr>
+    {% endfor %}
+    <tr class="table-active">
+        <td>Sum</td>
+        <td>{{ sum_income }}</td>
+        <td>{{ sum_expenditure }}</td>
+    </tr>
+    <tr class="table-active">
+        <td>Total</td>
+        <td></td>
+        <td>{{ total }}</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
+

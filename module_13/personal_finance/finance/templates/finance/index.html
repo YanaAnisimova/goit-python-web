@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col mb-3">
+            <h1 class="mb-3 mt-3">{% block title %}Personal finance{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'finance:new_record' %}">Create record</a></li>
+    <li><a href="{% url 'finance:reports' %}">Reports</a></li>
+</ul>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Category</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Income</th>
+        <th scope="col">Expenditure</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for record in latest_record_list %}
+    <tr>
+        <td>{{ record.created.date}}</td>
+        <td>{{ record.categories.name }}</td>
+        <td>{{ record.comment }}</td>
+        {% if record.amount < 0 %}
+        <td></td>
+        <td>{{ record.amount }}</td>
+        {% else %}
+        <td>{{ record.amount }}</td>
+        <td></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+
+

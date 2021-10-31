@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Register {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'auth:register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input class="btn btn-warning" type="submit" value="Register">
+    </form>
+{% endblock %}
+
+<!--<form action="{% url 'auth:register' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <label for="username">Username</label>-->
+<!--    <input name="username" id="username" value="{{ username }}" required>-->
+<!--    <br>-->
+<!--    <label for="email">E-mail</label>-->
+<!--    <input name="email" id="email" value="{{ email }}" required>-->
+<!--    <br>-->
+<!--    <label for="password">Password</label>-->
+<!--    <input type="password" name="password" value="{{ password }}" id="password">-->
+<!--    <br>-->
+<!--    <input type="submit" value="Register">-->
+<!--</form>-->

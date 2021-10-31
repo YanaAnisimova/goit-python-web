@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container">
+    <div class="row">
+        <div class="col mb-3">
+            <h1 class="mb-3 mt-3">{% block title %}Reports{% endblock %}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'finance:reports' %}" method="get">
+    {% csrf_token %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col mb-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="reports" id="r_detailed" value="r_detailed"
+                           required>
+                    <label class="form-check-label" for="r_detailed">Report detailed</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="reports" id="r_category" value="r_category"
+                           required>
+                    <label class="form-check-label" for="r_category">Report by category</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="reports" id="r_month" value="r_month" required>
+                    <label class="form-check-label" for="r_month">Report by month</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <b>Categories</b></div>
+
+            <div class="col-6 mb-3">
+                <select name="category" class="form-select w-100" multiple aria-label="multiple select example">
+                    {% if categories %}
+                    <option selected value="all">All categories</option>
+                    {% for category in categories %}
+                    <option value="{{category.name}}">{{ category.name }}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="col-12"><b>Period</b></div>
+            <div class="col-12 mb-3">
+
+                <label for="from">From</label>
+                <input type="date" name="from" id="from">
+                <label for="to">To</label>
+                <input type="date" name="to" id="to">
+
+                <input class="btn btn-warning mt-3 d-flex" name="Report" type="submit" value="Report">
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+{% endblock %}
+
+
+
+
